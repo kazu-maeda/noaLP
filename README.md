@@ -2,6 +2,9 @@
 
 スキンケアブランド「noa」のランディングページ実装。
 
+- **公開URL**: https://noalp.vercel.app/
+- **GitHub**: https://github.com/kazu-maeda/noaLP
+
 ## 技術構成
 
 - HTML / CSS / JavaScript（フレームワーク不使用）
@@ -77,3 +80,10 @@ python3 -m http.server 8765
 ```
 
 `http://localhost:8765/index.html` にアクセス。
+
+## デプロイ
+
+GitHubリポジトリ(`kazu-maeda/noaLP`)にpushすると、Vercel側で自動的に本番反映されます。
+静的サイトのため`vercel.json`やビルド設定は不要です(Framework Preset: `Other`)。
+
+デザインカンプ元ファイル(`noaLP.jpg` / `noa.ai`)や作業用キャプチャ(`.playwright-mcp/`)はリポジトリ・デプロイ対象から除外しています(`.gitignore` / `.vercelignore`)。
