@@ -86,4 +86,22 @@ python3 -m http.server 8765
 GitHubリポジトリ(`kazu-maeda/noaLP`)にpushすると、Vercel側で自動的に本番反映されます。
 静的サイトのため`vercel.json`やビルド設定は不要です(Framework Preset: `Other`)。
 
+- **公開URL**: https://noalp.vercel.app/
+- **GitHub**: https://github.com/kazu-maeda/noaLP
+- **Vercelプロジェクト**: `kazuya-m1/noalp`(プロジェクト名は小文字必須のため`noaLP`ではなく`noalp`)
+
 デザインカンプ元ファイル(`noaLP.jpg` / `noa.ai`)や作業用キャプチャ(`.playwright-mcp/`)はリポジトリ・デプロイ対象から除外しています(`.gitignore` / `.vercelignore`)。
+
+### 初回セットアップ手順(実施済み)
+
+1. `.gitignore`を作成し、デザインカンプ元ファイル・作業用キャプチャ・`.DS_Store`を除外
+2. `git init` → `git add -A` → 初回コミット
+3. `gh repo create kazu-maeda/noaLP --public --source=. --remote=origin --push`でGitHubリポジトリを作成しpush
+4. `vercel link --yes --project noalp`でVercelプロジェクトを新規作成し、GitHubリポジトリと自動連携
+5. `vercel --prod --yes`で本番デプロイ
+
+### ハマったポイント
+
+- 初回の`vercel --prod`は`.gitignore`を参照せず、`.vercelignore`が無い状態だったため`noa.ai`(約90MB)や`.playwright-mcp/`まで含めてアップロードしてしまった(92.3MB / 80ファイル)。
+- `.vercelignore`を`.gitignore`と同内容で追加し再デプロイしたところ、17ファイルのみの軽量デプロイになった。肥大化した旧デプロイは`vercel remove`で削除済み。
+- → **Git経由の自動デプロイと、`vercel` CLIでの直接デプロイは除外ルールが別物**なので、どちらを使う場合も`.vercelignore`を用意しておくのが安全。
